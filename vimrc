@@ -21,6 +21,14 @@ let g:Powerline_cache_enabled = 0
 " let g:Powerline_stl_path_style = 'full'
 let g:Powerline_colorscheme = 'solarized256'
 
+let g:indent_guides_enable_on_vim_startup = 1
+set ts=4 sw=4 et
+let g:indent_guides_start_level=2
+let g:indent_guides_guide_size=1
+" let g:indent_guides_auto_colors = 0
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=lightgrey   ctermbg=3
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=darkgrey ctermbg=4
+
 "<CR>: close popup and save indent.
 inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
 " <TAB>: completion. NO USE with snipmate
@@ -41,21 +49,6 @@ set confirm
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,utf-16,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 
-""""""""""
-" Colors "
-""""""""""
-if &t_Co == 256
-    colorscheme Tomorrow-Night-Bright
-    " colorscheme molokai
-    highlight Pmenu ctermbg=234 guibg=#606060
-    highlight PmenuSel ctermbg=17 guifg=#dddd00
-    highlight PmenuSbar ctermbg=17 guibg=#d6d6d6
-else
-    colorscheme caciano
-    highlight Pmenu ctermbg=0
-    highlight PmenuSel ctermbg=4
-    highlight PmenuSbar ctermbg=7
-endif
 
 "字体
 set guifontwide=Monaco:h14
@@ -82,7 +75,7 @@ filetype plugin indent on
 
 map <F5> :NERDTreeToggle<CR>
 
-nmap <F7> :TagbarToggle<CR>
+nmap <F6> :TagbarToggle<CR>
 set shortmess=atl
 
 set smartindent
@@ -112,17 +105,6 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType java set omnifunc=javacomplete#Complet
 
-" syntastic
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_python_flake8_args='--ignore=E501,W404,W801'
-
-let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': ['python', 'javascript'],
-                           \ 'passive_filetypes': ['rst'] }
-
-autocmd ColorScheme * highlight TrailWhitespace ctermbg=red guibg=red
-highlight TrailWhitespace ctermbg=red guibg=red
-match TrailWhitespace /\s\+$/
 
 " startify
 let g:startify_session_dir = '~/.vim/sessions'
@@ -167,54 +149,70 @@ let g:startify_custom_header = [
 set nocompatible               " be iMproved
 filetype off                   " required!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " let Vundle manage Vundle
 " required!
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
-" My Bundles here:
+" My Plugins here:
 "
 " original repos on github
-Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle 'tpope/vim-rails.git'
+Plugin 'tpope/vim-fugitive'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'tpope/vim-rails.git'
 " vim-scripts repos
-Bundle 'L9'
-Bundle 'FuzzyFinder'
+Plugin 'L9'
+Plugin 'FuzzyFinder'
 " non github repos
-Bundle 'git://git.wincent.com/command-t.git'
-Bundle 'Shougo/neocomplcache'
-Bundle 'JavaScript-syntax'
-Bundle 'jQuery'
-Bundle 'othree/html5.vim'
-Bundle 'groenewege/vim-less'
-Bundle 'Markdown'
-Bundle 'Markdown-syntax'
-Bundle "pangloss/vim-javascript"
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "snipmate-snippets"
-Bundle "garbas/vim-snipmate"
-Bundle "tpope/vim-fugitive"
-Bundle "vim-powerline"
-Bundle "git://github.com/majutsushi/tagbar"
-Bundle "scrooloose/nerdtree"
-Bundle "ZenCoding.vim"
-Bundle "scrooloose/syntastic"
-Bundle "vim-scripts/TabBar"
-Bundle "mhinz/vim-startify"
-Bundle "guns/xterm-color-table.vim"
-Bundle "chriskempson/vim-tomorrow-theme"
-Bundle "synmark.vim"
-Bundle "browser.vim"
+Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'Shougo/neocomplcache'
+Plugin 'JavaScript-syntax'
+Plugin 'jQuery'
+Plugin 'othree/html5.vim'
+Plugin 'groenewege/vim-less'
+Plugin 'Markdown'
+Plugin 'Markdown-syntax'
+Plugin 'pangloss/vim-javascript'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'snipmate-snippets'
+Plugin 'garbas/vim-snipmate'
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'powerline/fonts'
+Plugin 'bling/vim-bufferline'
+Plugin 'git://github.com/majutsushi/tagbar'
+Plugin 'scrooloose/nerdtree'
+Plugin 'ZenCoding.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'vim-scripts/TabBar'
+Plugin 'mhinz/vim-startify'
+Plugin 'guns/xterm-color-table.vim'
+Plugin 'chriskempson/vim-tomorrow-theme'
+Plugin 'synmark.vim'
+Plugin 'browser.vim'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'tacahiroy/ctrlp-funky'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'mbbill/undotree'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'luochen1990/rainbow'
+Plugin 'klen/python-mode'
+Plugin 'yssource/python.vim'
+Plugin 'python_match.vim'
+Plugin 'pythoncomplete'
+Plugin 'tpope/vim-markdown'
 " git repos on your local machine (ie. when working on your own plugin)
 " Bundle 'file:///Users/gmarik/path/to/plugin'
 " ...
 
-filetype plugin indent on     " required!
+call vundle#end()            " required
+filetype plugin indent on    " required
 "
 " Brief help
 " :BundleList          - list configured bundles
@@ -224,3 +222,31 @@ filetype plugin indent on     " required!
 "
 " see :h vundle for more details or wiki for FAQ
  " NOTE: comments after Bundle command are not allowed..
+
+ """"""""""
+" Colors "
+""""""""""
+if &t_Co == 256
+    colorscheme Tomorrow-Night-Bright
+    " colorscheme molokai
+    highlight Pmenu ctermbg=234 guibg=#606060
+    highlight PmenuSel ctermbg=17 guifg=#dddd00
+    highlight PmenuSbar ctermbg=17 guibg=#d6d6d6
+else
+    colorscheme caciano
+    highlight Pmenu ctermbg=0
+    highlight PmenuSel ctermbg=4
+    highlight PmenuSbar ctermbg=7
+endif
+
+" syntastic
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_flake8_args='--ignore=E501,W404,W801'
+
+let g:syntastic_mode_map = { 'mode': 'active',
+                           \ 'active_filetypes': ['python', 'javascript'],
+                           \ 'passive_filetypes': ['rst'] }
+
+autocmd ColorScheme * highlight TrailWhitespace ctermbg=red guibg=red
+highlight TrailWhitespace ctermbg=red guibg=red
+match TrailWhitespace /\s\+$/
